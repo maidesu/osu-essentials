@@ -3,8 +3,8 @@
 #include <Windows.h>
 #include <TlHelp32.h>
 
-namespace RuntimeTools {
+namespace OsuEssentials {
 
 	DWORD GetProcessIdByName(const char* processName);
 
-} // namespace RuntimeTools
+} // namespace OsuEssentials

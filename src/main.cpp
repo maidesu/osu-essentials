@@ -2,23 +2,23 @@
 #define MAX_LOADSTRING 100
 
 #include <assert.h>
-#include <SDKDDKVer.h>
+#include <sdkddkver.h>
 #include <windows.h>
 #include <stdlib.h>
-#include <malloc.h>
-#include <memory.h>
 #include <tchar.h>
 #include <shellapi.h>
+
 #include "../resource/resource.h"
+
 
 HINSTANCE hInst;
 NOTIFYICONDATA nid;
-WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
-WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+//WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
+//WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
-ATOM                MyRegisterClass(HINSTANCE hInstance);
+//ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE);
-LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
+//LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    DialogProc(HWND, UINT, WPARAM, LPARAM);
 
 
@@ -33,16 +33,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // TODO: Place code here.
 
-    LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadString(hInstance, IDC_PROJECT, szWindowClass, MAX_LOADSTRING);
-    MyRegisterClass(hInstance);
+    //LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
+    //LoadString(hInstance, IDC_PROJECT, szWindowClass, MAX_LOADSTRING);
+    //MyRegisterClass(hInstance);
 
     if (!InitInstance(hInstance))
     {
         return 1;
     }
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_PROJECT));
+    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDD_DIALOG));
 
     MSG msg;
     while (GetMessage(&msg, nullptr, 0, 0))
@@ -57,7 +57,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     return (int) msg.wParam;
 }
 
-ATOM MyRegisterClass(HINSTANCE hInstance)
+/*ATOM MyRegisterClass(HINSTANCE hInstance)
 {
     WNDCLASSEX wcex;
 
@@ -71,20 +71,17 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCE(IDC_PROJECT);
+    wcex.lpszMenuName   = MAKEINTRESOURCE(IDD_DIALOG);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
     return RegisterClassEx(&wcex);
-}
+}*/
 
 
 BOOL InitInstance(HINSTANCE hInstance)
 {
    hInst = hInstance;
-
-   //HWND hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-   //   CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
    HWND hWnd = CreateDialog(hInstance, MAKEINTRESOURCE(IDD_DIALOG), NULL, DialogProc);
 
@@ -118,12 +115,12 @@ BOOL InitInstance(HINSTANCE hInstance)
 //  WM_DESTROY  - post a quit message and return
 //
 //
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+/*LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     UNREFERENCED_PARAMETER(message);
     UNREFERENCED_PARAMETER(wParam);
     UNREFERENCED_PARAMETER(lParam);
-    /*
+
     switch (message)
     {
     case WM_COMMAND:
@@ -148,9 +145,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
-    }*/
+    }
     return 0;
-}
+}*/
 
 
 INT_PTR CALLBACK DialogProc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam)
@@ -163,23 +160,43 @@ INT_PTR CALLBACK DialogProc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lPara
         case WM_LBUTTONDBLCLK:
             ShowWindow(hWnd, SW_RESTORE);
             break;
+
         case WM_RBUTTONDOWN:
         case WM_CONTEXTMENU:
             HMENU hMenu, hMenuPopup;
+
             POINT pt;
             GetCursorPos(&pt);
 
-            hMenu = LoadMenu(hInst, MAKEINTRESOURCE(IDD_POPUP));
-
-            assert(hMenu);
-
+            hMenu = LoadMenu(hInst, MAKEINTRESOURCE(IDD_DIALOG));
             hMenuPopup = GetSubMenu(hMenu, 0);
-            assert(hMenuPopup);
+
+
+            /*hMenuPopup = CreatePopupMenu();
+            MENUITEMINFO menuItemInfo;
+            ZeroMemory(&menuItemInfo, sizeof(menuItemInfo));
+            menuItemInfo.cbSize = sizeof(menuItemInfo);
+            menuItemInfo.fMask = MIIM_ID | MIIM_TYPE;
+            menuItemInfo.fType = MFT_STRING;
+            menuItemInfo.wID = 669;
+            menuItemInfo.dwTypeData = (LPWSTR)L"Exit";
+            menuItemInfo.cch = wcslen(menuItemInfo.dwTypeData);
+            InsertMenuItem(hMenuPopup, 0, TRUE, &menuItemInfo);
+
+            HDC hDC = GetDC(hWnd);
+            assert(hDC != NULL);
+
+            HFONT hFont = CreateFont(14, 0, 0, 0, FW_NORMAL, 0, 0, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"Arial");
+            assert(hFont != NULL);*/
+
+            //HDC hDC = GetDC(hWnd);
+            //SetTextAlign(hDC, TA_CENTER);
 
             SetForegroundWindow(hWnd);
 
-            TrackPopupMenu(hMenuPopup, TPM_BOTTOMALIGN, pt.x, pt.y, 0, hWnd, NULL);
+            TrackPopupMenuEx(hMenuPopup, TPM_BOTTOMALIGN | TPM_RIGHTBUTTON, pt.x, pt.y, hWnd, NULL);
 
+            DestroyMenu(hMenuPopup);
             DestroyMenu(hMenu);
         }
         break;
@@ -188,10 +205,11 @@ INT_PTR CALLBACK DialogProc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lPara
         switch (LOWORD(wParam))
         {
         case IDM_EXIT:
+            Shell_NotifyIcon(NIM_DELETE, &nid);
             DestroyWindow(hWnd);
+            PostQuitMessage(0);
             break;
         }
-
         break;
 
     case WM_DESTROY:

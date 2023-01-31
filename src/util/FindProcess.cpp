@@ -1,6 +1,6 @@
 #include "FindProcess.hpp"
 
-namespace RuntimeTools {
+namespace OsuEssentials {
 
 DWORD GetProcessIdByName(const char* processName)
 {
@@ -28,4 +28,4 @@ DWORD GetProcessIdByName(const char* processName)
     return 0;
 }
 
-} // namespace RuntimeTools
+} // namespace OsuEssentials

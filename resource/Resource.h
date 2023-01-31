@@ -7,10 +7,12 @@
 #define IDD_DIALOG				111
 #define IDD_ABOUTBOX			112
 #define IDD_MESSAGE				113
-#define IDD_POPUP				114
+#define IDD_MENU				114
 
 #define IDM_ABOUT				121
-#define IDM_EXIT				122
+#define IDM_PRIORITY			122
+#define IDM_SUBMIT				123
+#define IDM_EXIT				124
 
 #define IDI_ICON				131
 #define IDI_SMALL				132
