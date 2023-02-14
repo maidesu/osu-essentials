@@ -4,6 +4,6 @@
 
 namespace osuessentials {
 
-	DWORD GetProcessIdByName(const char* processName);
+DWORD GetProcessIdByName(const char* processName);
 
 } // namespace osuessentials

@@ -1,0 +1,2 @@
+namespace osuessentials {
+} // namespace osuessentials
