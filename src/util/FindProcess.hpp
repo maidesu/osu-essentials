@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Windows.h>
-#include <TlHelp32.h>
+#include <windows.h>
 
-namespace OsuEssentials {
+namespace osuessentials {
 
 	DWORD GetProcessIdByName(const char* processName);
 
-} // namespace OsuEssentials
+} // namespace osuessentials

@@ -1,6 +1,8 @@
 #include "FindProcess.hpp"
 
-namespace OsuEssentials {
+#include <tlhelp32.h>
+
+namespace osuessentials {
 
 DWORD GetProcessIdByName(const char* processName)
 {
@@ -28,4 +30,4 @@ DWORD GetProcessIdByName(const char* processName)
     return 0;
 }
 
-} // namespace OsuEssentials
+} // namespace osuessentials

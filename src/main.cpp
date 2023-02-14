@@ -101,17 +101,23 @@ INT_PTR CALLBACK DialogProc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lPara
             switch (LOWORD(wParam))
             {
                 case IDM_EXIT:
-                    Shell_NotifyIcon(NIM_DELETE, &nid);
-                    DestroyWindow(hWnd);
-                    PostQuitMessage(0);
+                    PostMessage(hWnd, WM_CLOSE, 0, 0);
                     break;
             }
             break;
 
-        case WM_DESTROY:
-            Shell_NotifyIcon(NIM_DELETE, &nid);
+        case WM_CLOSE:
             DestroyWindow(hWnd);
             break;
+
+        case WM_DESTROY:
+            Shell_NotifyIcon(NIM_DELETE, &nid);
+            PostQuitMessage(0);
+            break;
+
+        default:
+            // Default processing of messages not handled already
+            return DefWindowProc(hWnd, Message, wParam, lParam);
     }
 
     return 0;
