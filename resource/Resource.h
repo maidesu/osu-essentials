@@ -1,3 +1,5 @@
+#pragma once
+
 #define NOTIFY_ID				1
 
 #define IDR_MAINFRAME			100
