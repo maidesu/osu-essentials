@@ -12,9 +12,7 @@
 
 using namespace osuessentials;
 
-HINSTANCE Application::hInst = NULL;
-HWND Application::hWnd = NULL;
-NOTIFYICONDATA Application::nid = (NOTIFYICONDATA)NULL;
+INT_PTR CALLBACK DialogProc(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -25,7 +23,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
     UNREFERENCED_PARAMETER(nCmdShow);
 
-    if (!Application::Init(hInstance))
+    HWND hWindow = CreateDialog(hInstance, MAKEINTRESOURCE(IDD_DIALOG), NULL, DialogProc);
+    if (!hWindow) { return 1; }
+
+    Application app(hInstance, hWindow);
+
+    if (!app.Init())
     {
         return 1;
     }
@@ -43,4 +46,50 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     return (int)msg.wParam;
+}
+
+INT_PTR CALLBACK DialogProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    Application* pApp = (Application*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
+
+    switch (message)
+    {
+        case IDD_MESSAGE:
+            switch (lParam)
+            {
+                case WM_RBUTTONDOWN:
+                case WM_CONTEXTMENU:
+                    if (pApp) {
+                        pApp->ShowShortcutMenu();
+                    }
+                    break;
+            }
+            break;
+
+        case WM_COMMAND:
+            switch (LOWORD(wParam))
+            {
+                case IDM_EXIT:
+                    PostMessage(hWnd, WM_CLOSE, 0, 0);
+                    break;
+            }
+            break;
+
+        case WM_CLOSE:
+            DestroyWindow(hWnd);
+            break;
+
+        case WM_DESTROY:
+            if (pApp) {
+                pApp->OnQuit();
+            }
+            PostQuitMessage(0);
+            break;
+
+        default:
+            // Default processing of messages not handled already
+            return DefWindowProc(hWnd, message, wParam, lParam);
+    }
+
+    return 0;
 }

@@ -2,12 +2,9 @@
 
 namespace osuessentials {
 
-bool Application::Init(HINSTANCE hInstance)
+bool Application::Init()
 {
-    hInst = hInstance;
-    hWnd = CreateDialog(hInst, MAKEINTRESOURCE(IDD_DIALOG), NULL, DialogProc);
-
-    if (!hWnd) { return false; }
+    SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)this);
 
     nid.cbSize = sizeof(NOTIFYICONDATA);
     nid.uID = NOTIFY_ID;
@@ -40,44 +37,9 @@ void Application::ShowShortcutMenu()
     DestroyMenu(hMenu);
 }
 
-INT_PTR CALLBACK Application::DialogProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+void Application::OnQuit()
 {
-    switch (message)
-    {
-        case IDD_MESSAGE:
-            switch (lParam)
-            {
-                case WM_RBUTTONDOWN:
-                case WM_CONTEXTMENU:
-                    ShowShortcutMenu();
-                    break;
-            }
-            break;
-
-        case WM_COMMAND:
-            switch (LOWORD(wParam))
-            {
-                case IDM_EXIT:
-                    PostMessage(hWnd, WM_CLOSE, 0, 0);
-                    break;
-            }
-            break;
-
-        case WM_CLOSE:
-            DestroyWindow(hWnd);
-            break;
-
-        case WM_DESTROY:
-            Shell_NotifyIcon(NIM_DELETE, &nid);
-            PostQuitMessage(0);
-            break;
-
-        default:
-            // Default processing of messages not handled already
-            return DefWindowProc(hWnd, message, wParam, lParam);
-    }
-
-    return 0;
+    Shell_NotifyIcon(NIM_DELETE, &nid);
 }
 
 } // namespace osuessentials

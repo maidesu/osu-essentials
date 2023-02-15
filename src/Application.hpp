@@ -9,13 +9,21 @@ namespace osuessentials {
 class Application
 {
 public:
-    static bool Init(HINSTANCE hInstance);
-    static void ShowShortcutMenu();
-    static INT_PTR CALLBACK DialogProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+    Application(HINSTANCE hInstance, HWND hWindow) :
+        hInst(hInstance),
+        hWnd(hWindow),
+        nid()
+    {}
 
-    static HINSTANCE hInst;
-    static HWND hWnd;
-    static NOTIFYICONDATA nid;
+    bool Init();
+    void ShowShortcutMenu();
+    void OnQuit();
+
+    HINSTANCE hInst;
+    HWND hWnd;
+
+private:
+    NOTIFYICONDATA nid;
 };
 
 } // namespace osuessentials
