@@ -7,15 +7,14 @@
 #include <tchar.h>
 #include <shellapi.h>
 
+#include "Application.hpp"
 #include "../resource/resource.h"
 
+using namespace osuessentials;
 
-HINSTANCE hInst;
-NOTIFYICONDATA nid;
-
-BOOL                InitInstance(HINSTANCE);
-INT_PTR CALLBACK    DialogProc(HWND, UINT, WPARAM, LPARAM);
-
+HINSTANCE Application::hInst = NULL;
+HWND Application::hWnd = NULL;
+NOTIFYICONDATA Application::nid = (NOTIFYICONDATA)NULL;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -26,7 +25,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
     UNREFERENCED_PARAMETER(nCmdShow);
 
-    if (!InitInstance(hInstance))
+    if (!Application::Init(hInstance))
     {
         return 1;
     }
@@ -44,81 +43,4 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     return (int)msg.wParam;
-}
-
-BOOL InitInstance(HINSTANCE hInstance)
-{
-   hInst = hInstance;
-
-   HWND hWnd = CreateDialog(hInstance, MAKEINTRESOURCE(IDD_DIALOG), NULL, DialogProc);
-
-   if (!hWnd)
-   {
-      return false;
-   }
-
-   nid.cbSize = sizeof(NOTIFYICONDATA);
-   nid.uID = NOTIFY_ID;
-   nid.hWnd = hWnd;
-   nid.uFlags = NIF_MESSAGE | NIF_ICON | NIF_TIP;
-   nid.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON));
-   nid.uCallbackMessage = IDD_MESSAGE;
-
-   Shell_NotifyIcon(NIM_ADD, &nid);
-
-   //ShowWindow(hWnd, SW_SHOW);
-   //UpdateWindow(hWnd);
-
-   return true;
-}
-
-INT_PTR CALLBACK DialogProc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam)
-{
-    switch (Message)
-    {
-        case IDD_MESSAGE:
-            switch (lParam)
-            {
-                case WM_RBUTTONDOWN:
-                case WM_CONTEXTMENU:
-                    HMENU hMenu, hMenuPopup;
-                    POINT pt;
-
-                    hMenu = LoadMenu(hInst, MAKEINTRESOURCE(IDD_DIALOG));
-                    hMenuPopup = GetSubMenu(hMenu, 0);
-
-                    GetCursorPos(&pt);
-                    SetForegroundWindow(hWnd);
-
-                    TrackPopupMenuEx(hMenuPopup, TPM_BOTTOMALIGN | TPM_RIGHTBUTTON, pt.x, pt.y, hWnd, NULL);
- 
-                    DestroyMenu(hMenu);
-                    break;
-            }
-            break;
-
-        case WM_COMMAND:
-            switch (LOWORD(wParam))
-            {
-                case IDM_EXIT:
-                    PostMessage(hWnd, WM_CLOSE, 0, 0);
-                    break;
-            }
-            break;
-
-        case WM_CLOSE:
-            DestroyWindow(hWnd);
-            break;
-
-        case WM_DESTROY:
-            Shell_NotifyIcon(NIM_DELETE, &nid);
-            PostQuitMessage(0);
-            break;
-
-        default:
-            // Default processing of messages not handled already
-            return DefWindowProc(hWnd, Message, wParam, lParam);
-    }
-
-    return 0;
 }
