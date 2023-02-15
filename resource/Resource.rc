@@ -1,5 +1,5 @@
 #include <sdkddkver.h>
-#include "windows.h"
+#include <windows.h>
 
 #include "resource.h"
 
@@ -9,8 +9,8 @@
 // Icon
 //
 
-IDI_ICON           ICON         "icon.ico"
-IDI_SMALL          ICON         "small.ico"
+IDI_ICON        ICON        "icon.ico"
+IDI_SMALL       ICON        "small.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -18,15 +18,15 @@ IDI_SMALL          ICON         "small.ico"
 // Popup menu
 //
 
-IDD_DIALOG	MENU	DISCARDABLE
+IDD_DIALOG    MENU    DISCARDABLE
 BEGIN
-	POPUP	""
-	BEGIN
-		MENUITEM	"Always high priority",		IDM_PRIORITY,		CHECKED
-		MENUITEM	"Disable score submissions",		IDM_SUBMIT
-		MENUITEM	SEPARATOR
-		MENUITEM	"Exit",			IDM_EXIT
-	END
+    POPUP    ""
+    BEGIN
+        MENUITEM    "Always high priority",            IDM_PRIORITY,    CHECKED
+        MENUITEM    "Disable score submissions",       IDM_SUBMIT
+        MENUITEM    SEPARATOR
+        MENUITEM    "Exit",                            IDM_EXIT
+    END
 END
 
 
@@ -35,9 +35,9 @@ END
 // Dialog
 //
 
-IDD_DIALOG	DIALOGEX	0, 0, 0, 0
-CAPTION "osu! tools"
-FONT 8, "Dialog"
+IDD_DIALOG    DIALOGEX    0, 0, 0, 0
+CAPTION        "osu! tools"
+FONT    8,     "Dialog"
 BEGIN
 END
 
@@ -47,10 +47,10 @@ END
 // Accelerator
 //
 
-IDD_DIALOG	ACCELERATORS
+IDD_DIALOG    ACCELERATORS
 BEGIN
-	"?", IDM_ABOUT, ASCII, ALT
-	0x71, IDM_ABOUT, VIRTKEY
+    "?",    IDM_ABOUT,    ASCII,    ALT
+    0x71,   IDM_ABOUT,    VIRTKEY
 END
 
 
@@ -61,8 +61,8 @@ END
 
 STRINGTABLE
 BEGIN
-	IDC_PROJECT		"osu-runtime-tools"
-	IDS_APP_TITLE		"osu! tools"
+    IDC_PROJECT        "osu-runtime-tools"
+    IDS_APP_TITLE      "osu! tools"
 END
 
 
