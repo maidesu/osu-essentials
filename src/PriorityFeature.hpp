@@ -19,9 +19,9 @@ public:
 
 private:
     std::thread thread;
-    std::atomic<bool> stop { false };
+    std::atomic<bool> stopFlag { false };
 
-    bool SetHighPriority();
+    void SetHighPriority();
 };
 
 } // namespace osuessentials

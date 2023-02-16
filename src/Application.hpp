@@ -16,6 +16,7 @@ public:
 
     bool Init();
     void ShowShortcutMenu();
+    void ToggleFeature(int num);
     void OnQuit();
 
     HINSTANCE hInst;

@@ -69,6 +69,20 @@ INT_PTR CALLBACK DialogProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
         case WM_COMMAND:
             switch (LOWORD(wParam))
             {
+                case IDM_PRIORITY:
+                    if (pApp)
+                    {
+                        pApp->ToggleFeature(0);
+                    }
+                    break;
+
+                case IDM_SUBMIT:
+                    if (pApp)
+                    {
+                        //pApp->ToggleFeature(1);
+                    }
+                    break;
+
                 case IDM_EXIT:
                     PostMessage(hWnd, WM_CLOSE, 0, 0);
                     break;

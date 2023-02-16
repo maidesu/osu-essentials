@@ -36,6 +36,12 @@ void Application::ShowShortcutMenu()
     POINT pt;
 
     hMenu = LoadMenu(hInst, MAKEINTRESOURCE(IDD_DIALOG));
+
+    CheckMenuItem(hMenu, IDM_PRIORITY, features[0].get()->isEnabled() ? MF_CHECKED : MF_UNCHECKED);
+    // to be implemented
+    EnableMenuItem(hMenu, IDM_SUBMIT, MF_GRAYED);
+    //CheckMenuItem(hMenu, IDM_SUBMIT, features[1].get()->isEnabled() ? MF_CHECKED : MF_UNCHECKED);
+
     hMenuPopup = GetSubMenu(hMenu, 0);
 
     GetCursorPos(&pt);
@@ -44,6 +50,12 @@ void Application::ShowShortcutMenu()
     TrackPopupMenuEx(hMenuPopup, TPM_BOTTOMALIGN | TPM_RIGHTBUTTON, pt.x, pt.y, hWnd, NULL);
 
     DestroyMenu(hMenu);
+}
+
+// very sus
+void Application::ToggleFeature(int num)
+{
+    features[num].get()->Toggle();
 }
 
 void Application::OnQuit()

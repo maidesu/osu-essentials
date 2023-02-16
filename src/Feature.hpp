@@ -9,16 +9,19 @@ public:
     virtual bool TurnOff() = 0;
 
     virtual bool Toggle() {
-        enabled = !enabled;
         if (enabled)
         {
-            return TurnOn();
+            TurnOff();
         }
         else
         {
-            return TurnOff();
+            TurnOn();
         }
+        enabled = !enabled;
+        return enabled;
     }
+
+    virtual bool isEnabled() const { return enabled; }
 
 protected:
     bool enabled = false;
