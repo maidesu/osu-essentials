@@ -132,11 +132,14 @@
   <ItemGroup>
     <ClInclude Include="resource\Resource.h" />
     <ClInclude Include="src\Application.hpp" />
+    <ClInclude Include="src\Feature.hpp" />
+    <ClInclude Include="src\PriorityFeature.hpp" />
     <ClInclude Include="src\util\FindProcess.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\PriorityFeature.cpp" />
     <ClCompile Include="src\util\FindProcess.cpp" />
   </ItemGroup>
   <ItemGroup>

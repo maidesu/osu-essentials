@@ -1,7 +1,10 @@
 #pragma once
 
+#include <vector>
+#include <memory>
 #include <windows.h>
 
+#include "PriorityFeature.hpp"
 #include "../resource/resource.h"
 
 namespace osuessentials {
@@ -9,11 +12,7 @@ namespace osuessentials {
 class Application
 {
 public:
-    Application(HINSTANCE hInstance, HWND hWindow) :
-        hInst(hInstance),
-        hWnd(hWindow),
-        nid()
-    {}
+    Application(HINSTANCE hInstance, HWND hWindow);
 
     bool Init();
     void ShowShortcutMenu();
@@ -24,6 +23,7 @@ public:
 
 private:
     NOTIFYICONDATA nid;
+    std::vector<std::unique_ptr<Feature>> features;
 };
 
 } // namespace osuessentials

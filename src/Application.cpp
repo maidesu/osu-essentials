@@ -2,6 +2,15 @@
 
 namespace osuessentials {
 
+Application::Application(HINSTANCE hInstance, HWND hWindow) :
+    hInst(hInstance),
+    hWnd(hWindow),
+    nid()
+{
+    features.push_back(std::make_unique<PriorityFeature>());
+    //features.push_back(std::make_unique<SubmitFeature>());
+}
+
 bool Application::Init()
 {
     SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)this);
