@@ -37,10 +37,10 @@ void Application::ShowShortcutMenu()
 
     hMenu = LoadMenu(hInst, MAKEINTRESOURCE(IDD_DIALOG));
 
-    CheckMenuItem(hMenu, IDM_PRIORITY, features[0].get()->isEnabled() ? MF_CHECKED : MF_UNCHECKED);
+    CheckMenuItem(hMenu, IDM_PRIORITY, isEnabledFeature<PriorityFeature>() ? MF_CHECKED : MF_UNCHECKED);
     // to be implemented
     EnableMenuItem(hMenu, IDM_SUBMIT, MF_GRAYED);
-    //CheckMenuItem(hMenu, IDM_SUBMIT, features[1].get()->isEnabled() ? MF_CHECKED : MF_UNCHECKED);
+    //CheckMenuItem(hMenu, IDM_SUBMIT, isEnabledFeature<SubmitFeature>()  ? MF_CHECKED : MF_UNCHECKED);
 
     hMenuPopup = GetSubMenu(hMenu, 0);
 

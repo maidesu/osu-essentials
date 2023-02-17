@@ -28,6 +28,18 @@ public:
         }
     }
 
+    template <class T>
+    bool isEnabledFeature() {
+        for (const std::unique_ptr<Feature>& feature : features)
+        {
+            if (dynamic_cast<T*>(feature.get()) != nullptr) {
+                return feature.get()->isEnabled();
+            }
+        }
+
+        return false;
+    }
+
     HINSTANCE hInst;
     HWND hWnd;
 
