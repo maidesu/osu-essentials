@@ -79,7 +79,7 @@ INT_PTR CALLBACK DialogProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                 case IDM_SUBMIT:
                     if (pApp)
                     {
-                        //pApp->ToggleFeature<SubmitFeature>();
+                        pApp->ToggleFeature<SubmitFeature>();
                     }
                     break;
 

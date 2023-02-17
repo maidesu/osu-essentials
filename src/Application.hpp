@@ -5,6 +5,7 @@
 #include <windows.h>
 
 #include "PriorityFeature.hpp"
+#include "SubmitFeature.hpp"
 #include "../resource/resource.h"
 
 namespace osuessentials {
