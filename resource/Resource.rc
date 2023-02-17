@@ -22,10 +22,10 @@ IDD_DIALOG    MENU    DISCARDABLE
 BEGIN
     POPUP    ""
     BEGIN
-        MENUITEM    "Always high priority",            IDM_PRIORITY
-        MENUITEM    "Disable score submissions",       IDM_SUBMIT
+        MENUITEM    "Always high priority\tAlt+P",            IDM_PRIORITY
+        MENUITEM    "Disable score submissions\tAlt+S",       IDM_SUBMIT
         MENUITEM    SEPARATOR
-        MENUITEM    "Exit",                            IDM_EXIT
+        MENUITEM    "Quit\tAlt+Q",                            IDM_EXIT
     END
 END
 

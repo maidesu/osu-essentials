@@ -62,9 +62,11 @@ INT_PTR CALLBACK DialogProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
             }
             break;
 
+        case WM_HOTKEY:
         case WM_COMMAND:
             switch (LOWORD(wParam))
             {
+                case IDC_HOTKEY_PRIORITY:
                 case IDM_PRIORITY:
                     if (pApp)
                     {
@@ -72,6 +74,7 @@ INT_PTR CALLBACK DialogProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                     }
                     break;
 
+                case IDC_HOTKEY_SUBMIT:
                 case IDM_SUBMIT:
                     if (pApp)
                     {
@@ -79,6 +82,7 @@ INT_PTR CALLBACK DialogProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                     }
                     break;
 
+                case IDC_HOTKEY_EXIT:
                 case IDM_EXIT:
                     PostMessage(hWnd, WM_CLOSE, 0, 0);
                     break;

@@ -30,6 +30,11 @@ bool Application::Init()
     // Good to have on by default
     this->ToggleFeature<PriorityFeature>();
 
+    // Register hotkeys
+    RegisterHotKey(hWnd, IDC_HOTKEY_PRIORITY, MOD_ALT, 'P');
+    RegisterHotKey(hWnd, IDC_HOTKEY_SUBMIT, MOD_ALT, 'S');
+    RegisterHotKey(hWnd, IDC_HOTKEY_EXIT, MOD_ALT, 'Q');
+
     return true;
 }
 
