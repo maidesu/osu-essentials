@@ -2,6 +2,9 @@
 
 namespace osuessentials {
 
+class PriorityFeature;
+class SubmitFeature;
+
 class Feature
 {
 public:

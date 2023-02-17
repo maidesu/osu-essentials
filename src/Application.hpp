@@ -16,8 +16,17 @@ public:
 
     bool Init();
     void ShowShortcutMenu();
-    void ToggleFeature(int num);
     void OnQuit();
+
+    template <class T>
+    void ToggleFeature() {
+        for (const std::unique_ptr<Feature>& feature : features)
+        {
+            if (dynamic_cast<T*>(feature.get()) != nullptr) {
+                feature.get()->Toggle();
+            }
+        }
+    }
 
     HINSTANCE hInst;
     HWND hWnd;

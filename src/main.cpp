@@ -72,14 +72,14 @@ INT_PTR CALLBACK DialogProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                 case IDM_PRIORITY:
                     if (pApp)
                     {
-                        pApp->ToggleFeature(0);
+                        pApp->ToggleFeature<PriorityFeature>();
                     }
                     break;
 
                 case IDM_SUBMIT:
                     if (pApp)
                     {
-                        //pApp->ToggleFeature(1);
+                        //pApp->ToggleFeature<SubmitFeature>();
                     }
                     break;
 

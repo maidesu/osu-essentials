@@ -52,12 +52,6 @@ void Application::ShowShortcutMenu()
     DestroyMenu(hMenu);
 }
 
-// very sus
-void Application::ToggleFeature(int num)
-{
-    features[num].get()->Toggle();
-}
-
 void Application::OnQuit()
 {
     Shell_NotifyIcon(NIM_DELETE, &nid);
