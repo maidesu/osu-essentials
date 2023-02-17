@@ -24,8 +24,8 @@ bool Application::Init()
 
     Shell_NotifyIcon(NIM_ADD, &nid);
 
-    //ShowWindow(hWnd, SW_SHOW);
-    //UpdateWindow(hWnd);
+    // Good to have on by default
+    this->ToggleFeature<PriorityFeature>();
 
     return true;
 }
