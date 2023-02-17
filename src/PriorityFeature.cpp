@@ -29,7 +29,7 @@ void PriorityFeature::SetHighPriority()
 
     while (!stopFlag)
     {
-        hOsu = OpenProcess(PROCESS_SET_INFORMATION, FALSE, GetProcessIdByName("osu!.exe"));
+        hOsu = OpenProcess(PROCESS_SET_INFORMATION, FALSE, util::GetProcessIdByName("osu!.exe"));
 
         if (hOsu == NULL) {
             std::this_thread::sleep_for(std::chrono::seconds(2));

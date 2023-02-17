@@ -3,7 +3,7 @@
 #include <tlhelp32.h>
 #include <string>
 
-namespace osuessentials {
+namespace osuessentials::util {
 
 DWORD GetProcessIdByName(const char* processName)
 {

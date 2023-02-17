@@ -2,7 +2,7 @@
 
 #include <windows.h>
 
-namespace osuessentials {
+namespace osuessentials::util {
 
 DWORD GetProcessIdByName(const char* processName);
 
