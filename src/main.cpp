@@ -33,16 +33,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return 1;
     }
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDD_DIALOG));
-
     MSG msg;
     while (GetMessage(&msg, nullptr, 0, 0))
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
     }
 
     return (int)msg.wParam;
