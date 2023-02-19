@@ -76,7 +76,7 @@ INT_PTR CALLBACK DialogProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 
                 case IDC_HOTKEY_SUBMIT:
                 case IDM_SUBMIT:
-                    if (pApp)
+                    if (pApp && pApp->RequireAdmin())
                     {
                         pApp->ToggleFeature<SubmitFeature>();
                     }

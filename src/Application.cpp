@@ -1,5 +1,7 @@
 #include "Application.hpp"
 
+#include <shlobj_core.h>
+
 namespace osuessentials {
 
 Application::Application(HINSTANCE hInstance, HWND hWindow) :
@@ -47,7 +49,8 @@ void Application::ShowShortcutMenu()
 
     // Update checkboxes
     CheckMenuItem(hMenu, IDM_PRIORITY, isEnabledFeature<PriorityFeature>() ? MF_CHECKED : MF_UNCHECKED);
-    CheckMenuItem(hMenu, IDM_SUBMIT, isEnabledFeature<SubmitFeature>()  ? MF_CHECKED : MF_UNCHECKED);
+    CheckMenuItem(hMenu, IDM_SUBMIT, isEnabledFeature<SubmitFeature>() ? MF_CHECKED : MF_UNCHECKED);
+    EnableMenuItem(hMenu, IDM_SUBMIT, deniedAdmin ? MF_GRAYED : MF_ENABLED);
 
     hMenuPopup = GetSubMenu(hMenu, 0);
 
@@ -63,6 +66,29 @@ void Application::OnQuit()
 {
     // Remove Notify icon
     Shell_NotifyIcon(NIM_DELETE, &nid);
+}
+
+bool Application::RequireAdmin()
+{
+    if (IsUserAnAdmin()) { return true; }
+
+    WCHAR path[MAX_PATH];
+    GetModuleFileName(NULL, path, MAX_PATH);
+
+    SHELLEXECUTEINFO info = { sizeof(SHELLEXECUTEINFO) };
+    info.lpVerb = L"runas";
+    info.lpFile = path;
+    info.nShow = SW_NORMAL;
+
+    if (!ShellExecuteEx(&info)) {
+        this->deniedAdmin = true;
+
+        return false;
+    }
+
+    // Should not return success as the current process is still not privileged, instead terminate the instance
+    PostMessage(hWnd, WM_CLOSE, 0, 0);
+    return false;
 }
 
 } // namespace osuessentials

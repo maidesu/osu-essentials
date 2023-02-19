@@ -18,6 +18,7 @@ public:
     bool Init();
     void ShowShortcutMenu();
     void OnQuit();
+    bool RequireAdmin();
 
     template <class T>
     void ToggleFeature() {
@@ -47,6 +48,7 @@ public:
 private:
     NOTIFYICONDATA nid;
     std::vector<std::unique_ptr<Feature>> features;
+    bool deniedAdmin = false;
 };
 
 } // namespace osuessentials
