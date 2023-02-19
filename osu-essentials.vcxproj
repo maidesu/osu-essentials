@@ -141,6 +141,7 @@
     <ClInclude Include="src\Feature.hpp" />
     <ClInclude Include="src\PriorityFeature.hpp" />
     <ClInclude Include="src\SubmitFeature.hpp" />
+    <ClInclude Include="src\util\BlockDomain.hpp" />
     <ClInclude Include="src\util\FindProcess.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +149,7 @@
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\PriorityFeature.cpp" />
     <ClCompile Include="src\SubmitFeature.cpp" />
+    <ClCompile Include="src\util\BlockDomain.cpp" />
     <ClCompile Include="src\util\FindProcess.cpp" />
   </ItemGroup>
   <ItemGroup>

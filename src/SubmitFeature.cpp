@@ -1,15 +1,17 @@
 #include "SubmitFeature.hpp"
 
+#include "util/BlockDomain.hpp"
+
 namespace osuessentials {
 
     bool SubmitFeature::TurnOn()
     {
-        return false;
+        return util::BlockDomainOut();
     }
 
     bool SubmitFeature::TurnOff()
     {
-        return false;
+        return util::UnBlockDomainOut();
     }
 
 } //namespace osuessentials

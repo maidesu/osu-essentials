@@ -36,4 +36,4 @@ DWORD GetProcessIdByName(const char* processName)
     return 0;
 }
 
-} // namespace osuessentials
+} // namespace osuessentials::util

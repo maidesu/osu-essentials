@@ -1,9 +1,8 @@
 #pragma once
 
-#include <windows.h>
-
 namespace osuessentials::util {
 
-DWORD GetProcessIdByName(const char* processName);
+    bool BlockDomainOut();
+    bool UnBlockDomainOut();
 
 } // namespace osuessentials::util
